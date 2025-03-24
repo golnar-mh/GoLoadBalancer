@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  node1:
+    build: .
+    ports:
+      - "8081:8080"
+    environment:
+      - PORT=8080
+      - MAX_CPU=2
+      - MAX_MEMORY=200
+      - MEMORY_PER_REQUEST=50
+      - PEER_NODES=http://node2:8080,http://node3:8080,http://node4:8080
+
+  node2:
+    build: .
+    ports:
+      - "8082:8080"
+    environment:
+      - PORT=8080
+      - MAX_CPU=2
+      - MAX_MEMORY=200
+      - MEMORY_PER_REQUEST=50
+      - PEER_NODES=http://node1:8080,http://node3:8080,http://node4:8080
+
+  node3:
+    build: .
+    ports:
+      - "8083:8080"
+    environment:
+      - PORT=8080
+      - MAX_CPU=2
+      - MAX_MEMORY=200
+      - MEMORY_PER_REQUEST=50
+      - PEER_NODES=http://node1:8080,http://node2:8080,http://node4:8080
+
+  node4:
+    build: .
+    ports:
+      - "8084:8080"
+    environment:
+      - PORT=8080
+      - MAX_CPU=2
+      - MAX_MEMORY=200
+      - MEMORY_PER_REQUEST=50
+      - PEER_NODES=http://node1:8080,http://node2:8080,http://node3:8080
